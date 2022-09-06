@@ -18,11 +18,7 @@ public class JpaMain {
 
         try{
 
-            Book book = new Book();
-            book.setName("BookA");
-            book.setAuthor("Kim");
 
-            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
