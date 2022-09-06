@@ -27,6 +27,19 @@ public class JpaMain {
             orderItem.setOrderPrice(15000);
             orderItem.setCount(1);
 
+            Category parentCat = new Category();
+            parentCat.setName("parent category");
+            Category category = new Category();
+            category.setName("category");
+            Category childCat = new Category();
+            childCat.setName("child category");
+
+            parentCat.addChild(category);
+            category.addChild(childCat);
+            em.persist(parentCat);
+            em.persist(category);
+            em.persist(childCat);
+
             Member member = new Member();
             member.setName("memberA");
             member.setCity("seoul");
