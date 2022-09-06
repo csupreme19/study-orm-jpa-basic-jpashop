@@ -17,60 +17,12 @@ public class JpaMain {
         tx.begin();
 
         try{
-            Item item = new Item();
-            item.setName("itemA");
-            item.setPrice(5000);
-            item.setStockQuantity(1);
 
-            OrderItem orderItem = new OrderItem();
-            orderItem.setItem(item);
-            orderItem.setOrderPrice(15000);
-            orderItem.setCount(1);
+            Book book = new Book();
+            book.setName("BookA");
+            book.setAuthor("Kim");
 
-            Category parentCat = new Category();
-            parentCat.setName("parent category");
-            Category category = new Category();
-            category.setName("category");
-            Category childCat = new Category();
-            childCat.setName("child category");
-
-            parentCat.addChild(category);
-            category.addChild(childCat);
-            em.persist(parentCat);
-            em.persist(category);
-            em.persist(childCat);
-
-            Member member = new Member();
-            member.setName("memberA");
-            member.setCity("seoul");
-            member.setStreet("hi street");
-            member.setZipcode("12345");
-
-            Order order = new Order();
-            order.setOrderDate(LocalDateTime.now());
-            order.setStatus(OrderStatus.ORDER);
-            // 연관관계 편의 메소드
-            order.addOrderItem(orderItem);
-            order.changeMember(member);
-
-            em.persist(member);
-            em.persist(order);
-            em.persist(item);
-            em.persist(orderItem);
-
-//            em.flush();
-//            em.clear();
-
-            Member findMember = em.find(Member.class, member.getId());
-            List<Order> findOrders = findMember.getOrders();
-            Order findOrder = findOrders.get(0);
-            List<OrderItem> findOrderItems = findOrder.getOrderItems();
-            OrderItem findOrderItem = findOrderItems.get(0);
-            Item findItem = findOrderItem.getItem();
-
-            System.out.println("========================");
-            System.out.println("findItem(" + findItem.getId() + ", " + findItem.getName() + ", " + findItem.getPrice() + ", " + findItem.getStockQuantity() + ")");
-            System.out.println("========================");
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
