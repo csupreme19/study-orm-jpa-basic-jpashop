@@ -1,13 +1,12 @@
 package jpabook.jpashop;
 
-import jpabook.jpashop.domain.*;
+import jpabook.jpashop.domain.Address;
+import jpabook.jpashop.domain.Member;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -18,7 +17,12 @@ public class JpaMain {
 
         try{
 
+            Member member = new Member();
+            member.setAddress(new Address("city", "street", "12345"));
 
+            em.persist(member);
+
+            System.out.println(member.getAddress().fullAddress());
 
             tx.commit();
         } catch (Exception e) {
